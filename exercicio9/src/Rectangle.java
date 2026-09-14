@@ -1,6 +1,6 @@
 package com.example.shapes;
 
-public class Rectangle extends SHape {
+public class Rectangle extends Shape {
     private double width;
     private double height;
 
