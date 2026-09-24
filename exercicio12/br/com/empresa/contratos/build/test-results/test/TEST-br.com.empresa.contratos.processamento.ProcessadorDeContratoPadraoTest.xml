@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="br.com.empresa.contratos.processamento.ProcessadorDeContratoPadraoTest" tests="6" skipped="0" failures="0" errors="0" timestamp="2026-09-24T12:32:07" hostname="DESENVOLVIMENTO-27" time="0.053">
+  <properties/>
+  <testcase name="listaDeParcelasEhImutavel()" classname="br.com.empresa.contratos.processamento.ProcessadorDeContratoPadraoTest" time="0.035"/>
+  <testcase name="deveReproduzirExemploDoEnunciado()" classname="br.com.empresa.contratos.processamento.ProcessadorDeContratoPadraoTest" time="0.003"/>
+  <testcase name="jurosSimplesSaoProporcionaisAoNumeroDeMeses()" classname="br.com.empresa.contratos.processamento.ProcessadorDeContratoPadraoTest" time="0.002"/>
+  <testcase name="vencimentoEmMesCurtoUsaUltimoDiaDoMes()" classname="br.com.empresa.contratos.processamento.ProcessadorDeContratoPadraoTest" time="0.001"/>
+  <testcase name="quantidadeDeParcelasInvalidaLancaExcecao()" classname="br.com.empresa.contratos.processamento.ProcessadorDeContratoPadraoTest" time="0.002"/>
+  <testcase name="reprocessarSubstituiParcelasAnteriores()" classname="br.com.empresa.contratos.processamento.ProcessadorDeContratoPadraoTest" time="0.001"/>
+  <system-out><![CDATA[]]></system-out>
+  <system-err><![CDATA[]]></system-err>
+</testsuite>
