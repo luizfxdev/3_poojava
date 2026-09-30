@@ -4,7 +4,7 @@
 
 Em uma eleição, cada urna gera vários registros no formato `.csv` com o **nome do candidato** e a **quantidade de votos** obtida naquela urna. O programa deve ler os registros de um arquivo e gerar um **relatório consolidado** com o total de cada candidato.
 
-O mesmo candidato aparece várias vezes (uma linha por urna). O problema central é: **somar valores agrupados por uma chave**. Isso é o caso de uso clássico de `Map`.
+O mesmo candidato aparece várias vezes (uma linha por urna). O problema central é: **somar valores agrupados por uma chave**. 
 
 ---
 
@@ -22,9 +22,9 @@ votacao/
     └── Main.java
 ```
 
-### Por que 5 classes para um exercício pequeno?
+### Arquitetura
 
-Cada classe tem **uma única responsabilidade** (princípio SRP do Clean Code):
+Cada classe tem **uma única responsabilidade** :
 
 | Classe | Responsabilidade |
 |---|---|
@@ -34,7 +34,7 @@ Cada classe tem **uma única responsabilidade** (princípio SRP do Clean Code):
 | `RelatorioVotacao` | Exibir o resultado |
 | `Main` | Orquestrar o fluxo |
 
-Se amanhã o CSV virar um banco de dados, só `LeitorRegistros` muda. Se o relatório virar um PDF, só `RelatorioVotacao` muda.
+Em caso de escalabilidade, se o CSV virar um banco de dados, só `LeitorRegistros` muda. Se o relatório virar um PDF, só `RelatorioVotacao` muda.
 
 ### Formato do CSV (`dados/votos.csv`)
 
@@ -73,7 +73,7 @@ Declara o **pacote** da classe. Pacote é um "namespace": agrupa classes relacio
 
 ### Linha 3: `public record RegistroVotacao(String candidato, int votos) {`
 - `public`: modificador de acesso. A classe é visível para qualquer outra classe.
-- `record`: recurso do Java 16+ (estável no 17) para criar **classes imutáveis de dados**. O compilador gera automaticamente:
+- `record`: para criar **classes imutáveis de dados**. O compilador gera automaticamente:
   - campos `private final` (`candidato` e `votos`);
   - construtor canônico com todos os campos;
   - métodos de acesso `candidato()` e `votos()` (**sem** o prefixo `get`);
@@ -81,9 +81,9 @@ Declara o **pacote** da classe. Pacote é um "namespace": agrupa classes relacio
 - `RegistroVotacao`: nome da classe em **PascalCase** (convenção Java para tipos).
 - `(String candidato, int votos)`: **componentes** do record. São os atributos do objeto.
   - `String candidato`: texto, nome do candidato.
-  - `int votos`: tipo primitivo inteiro. Usei `int` (e não `Integer`) porque o voto nunca é nulo, e primitivos evitam *autoboxing* desnecessário.
+  - `int votos`: tipo primitivo inteiro. Utilizado `int` (e não `Integer`) porque o voto nunca é nulo, e primitivos evitam *autoboxing* desnecessário.
 
-**Decisão:** usar `record` em vez de uma classe comum elimina ~25 linhas de código repetitivo (construtor, getters, equals, hashCode, toString) e garante **imutabilidade**: depois de criado, o registro não muda. Isso é uma boa prática para objetos que só transportam dados.
+**Decisão:** usar `record` em vez de uma classe comum elimina ~25 linhas de código repetitivo (construtor, getters, equals, hashCode, toString) e garante **imutabilidade**: depois de criado, o registro não muda. 
 
 ### Linha 5: `public RegistroVotacao {`
 É o **construtor compacto** do record. Repare que:
@@ -224,7 +224,7 @@ if (campos.length != 2) {
 
 ---
 
-## 5. `ConsolidadorVotos.java` (o coração do exercício)
+## 5. `ConsolidadorVotos.java` (Escopo Central)
 
 ```java
 package votacao;
@@ -418,7 +418,7 @@ public class Main {
 ```
 
 ### Linha 10: `public static void main(String[] args) throws IOException {`
-Assinatura obrigatória do ponto de entrada de um programa Java:
+Assinatura obrigatória do ponto de entrada de um programa:
 - `public`: a JVM precisa acessá-lo de fora.
 - `static`: a JVM o chama **sem criar objeto** da classe.
 - `void`: não retorna nada.
